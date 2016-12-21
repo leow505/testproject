@@ -1,0 +1,21 @@
+<h1>Idea Show</h1>
+<table>
+<tr>
+	<td valign="top"><a href='/users/<%= @idea.user_id %>'><%= @idea.alias %></a> says: </td>
+	<td><span><%= @idea.content %></span>
+	</td>
+</tr>
+</table>
+<p>People who liked this post:</p>
+<table>
+	<tr>
+		<th>Alias</th>
+		<th>Name</th>
+	</tr>
+	<% @people_liked.each do |user| %>
+	<tr>
+		<td><%=user.alias%></td>
+		<td><%=user.name%></td>
+	</tr>
+	<% end -%>
+</table>

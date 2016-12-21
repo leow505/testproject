@@ -1,0 +1,20 @@
+<h1>Hi <%= @current_user.name %>!</h1>
+<p><a href="/logout" data-method='delete'>Logout</a></p>
+<form action="/ideas" method="post">
+	<input type="hidden" name="authenticity_token" value="<%= form_authenticity_token %>">
+	<input type="text" name="ideas" placeholder="Post something witty here...">
+	<input type="submit" value="Idea!">
+</form>
+<table>
+<% @ideas.each do |idea| %>
+<tr>
+	<td valign="top"><a href='/users/<%= idea.user_id %>'><%= idea.alias %></a> says: </td>
+	<td><span><%= idea.content %></span>
+		<p><a href='/likes/<%= idea.idea_id %>' data-method='patch'>Like</a> <a href='/ideas/<%= idea.idea_id %>'><%=@total_like %>people</a> like this.</p>
+		<% if session[:user_id] == idea.user_id %>
+			<a href="/ideas/<%= idea.idea_id %>" data-method='delete'>Delete</a>
+		<% end -%>
+	</td>
+</tr>
+<% end -%>
+</table>
